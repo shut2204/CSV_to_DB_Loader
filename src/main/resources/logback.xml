@@ -1,0 +1,27 @@
+<configuration>
+
+    <!-- Консольний апендер для INFO і вище -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %highlight(%-5level) - %highlight(%msg%n)</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Файловий апендер тільки для ERROR -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>error.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <encoder>
+            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Визначаємо, що root logger буде використовувати обидва апендери -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>
